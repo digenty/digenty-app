@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: app
+
+  jpa:
+    properties:
+      hibernate:
+        session:
+          events:
+            log:
+              LOGS_QUERIES_SLOWER_THAN_MS: 25
+
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+  datasource:
+    password: ${DB_PASS:}
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:digenty}?allowPublicKeyRetrieval=true&useSSL=FALSE&createDatabaseIfNotExist=true
+    username: ${DB_USER:root}
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 5
+      minimum-idle: 1
+
+
+payments:
+  paystack:
+    url: ${PAYSTACK_URL:https://api.paystack.co}
+    secretKey:  ${PAYSTACK_SECRET:sk_test_43883fa5d172aa91e93d5accc24999dff5422aea}
+#logging:
+#  file:
+#    name: farm.log
+#  level:
+#    org:
+#      springframework:
+server:
+  port: 8081
+#        security: INFO
