@@ -1,6 +1,6 @@
 package com.digenty.app.api.pricing;
 
-import com.kawa.farm.commons.core.BaseEntity;
+import com.digenty.app.commons.core.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;

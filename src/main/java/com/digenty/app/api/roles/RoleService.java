@@ -2,6 +2,7 @@ package com.digenty.app.api.roles;
 
 import com.digenty.app.api.permissions.Permission;
 import com.digenty.app.api.permissions.PermissionRepository;
+import com.digenty.app.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.text.WordUtils;

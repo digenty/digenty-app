@@ -1,8 +1,6 @@
 package com.digenty.app.api.students;
 
 import com.digenty.app.api.pricing.PriceService;
-import com.digenty.app.api.products.CreateProductDto;
-import com.digenty.app.api.products.ProductListResponse;
 import com.digenty.app.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,30 +17,13 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final PriceService priceService;
 
-    public Student createProduct(CreateProductDto createProductDto) {
-        log.info("create product");
-        log.info("security contest {}", SecurityContextHolder.getContext().getAuthentication().getName());
-        return studentRepository.save(createProductDto.toProduct());
-    }
-
-    public Page<ProductListResponse> getAllProducts(int page, int size) {
+    public Page<Student> getAllStudents(int size, int page) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
-        return studentRepository.findAll(pageable).map(this::createProductResponse);
+        return studentRepository.findAll(pageable);
     }
 
-    public ProductListResponse getProductById(Long id) {
-        Student student = studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Item not found"));
-        return createProductResponse(student);
+    public Student getStudent(Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Student with id " + id + " not found"));
     }
-
-    private ProductListResponse createProductResponse(Student student) {
-        return new ProductListResponse(
-                student.getName(), student.getType(), student.getDescription(),
-                student.getCategory(), student.getImage(), student.getStatus(),
-                priceService.getPrices(student.getId())
-        );
-    }
-
-
 }

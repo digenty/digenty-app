@@ -19,6 +19,4 @@ public class ClassRoom extends BaseEntity {
     private String type;
     private String description;
     private String category;
-    private String image;
-    private BoardingStatus status;
 }

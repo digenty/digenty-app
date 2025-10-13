@@ -1,6 +1,6 @@
 package com.digenty.app.api.permissions;
 
-import com.kawa.farm.exceptions.ResourceNotFoundException;
+import com.digenty.app.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
